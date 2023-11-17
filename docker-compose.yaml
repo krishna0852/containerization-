@@ -26,6 +26,7 @@ services:
     container_name: user
     depends_on:
       - mongodb
+      - redis
   cart:
     image: cart:ver1
     container_name: cart 
