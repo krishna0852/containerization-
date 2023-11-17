@@ -4,6 +4,9 @@ FROM debian:10 AS build
 # Install necessary tools for debugging and SSL certificates
 RUN apt-get update && apt-get -y install maven procps ca-certificates-java
 
+RUN update-ca-certificates
+
+
 # Set the working directory
 WORKDIR /opt/shipping
 
