@@ -1,18 +1,18 @@
-ARG VERSION=14
-
-FROM node:${VERSION}
-
-EXPOSE 8080
+FROM node:14
 
 ENV INSTANA_AUTO_PROFILE true
 
+EXPOSE 8080
+
+WORKDIR /opt/server
+
 COPY package.json /opt/server/
 
-WORKDIR /opt/server 
-
-RUN npm install 
+RUN npm install
 
 COPY server.js /opt/server/
 
-CMD ["node" "server.js"]
+CMD ["node", "server.js"]
+
+
 
