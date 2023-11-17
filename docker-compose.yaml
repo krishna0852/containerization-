@@ -2,8 +2,7 @@ version: "3.9"
 
 networks:
  roboshop:
-   driver:bridge 
-
+   driver: bridge 
 services:
   web:
     image: web-ui:ver1
@@ -22,5 +21,11 @@ services:
   mongodb:
     image: mongo:ver1
     container_name: mongodb
+  user:
+    image: user:ver1
+    container_name: user
+    depends_on:
+      - mongodb
+
 
       
