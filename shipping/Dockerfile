@@ -1,11 +1,12 @@
-FROM debian:10 AS build
-RUN apt-get update && apt-get -y install maven
+# Build Stage
+FROM maven:3.6.3-openjdk-11 AS build
 WORKDIR /opt/shipping
 COPY pom.xml /opt/shipping/
 RUN mvn dependency:resolve
 COPY src /opt/shipping/src/
 RUN mvn package
 
+# Production Stage
 FROM openjdk:8-jre-alpine
 EXPOSE 8080
 WORKDIR /opt/shipping
