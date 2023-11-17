@@ -1,8 +1,8 @@
 # Stage 1: Build stage
 FROM debian:10 AS build
 
-# Install necessary tools for debugging
-RUN apt-get update && apt-get -y install maven procps
+# Install necessary tools for debugging and SSL certificates
+RUN apt-get update && apt-get -y install maven procps ca-certificates-java
 
 # Set the working directory
 WORKDIR /opt/shipping
