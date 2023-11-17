@@ -9,45 +9,45 @@ services:
     container_name: web_container 
     ports:
       - "80:80"
-    depends_on:
-      - catalogue
-      - mongodb
-      - user
+    # depends_on:
+    #   - catalogue
+    #   - mongodb
+    #   - user
   catalogue:
     image: catalogue:ver1
     container_name: catalogue
-    depends_on:
-     - mongodb
+    # depends_on:
+    #  - mongodb
   mongodb:
     image: mongo:ver1
     container_name: mongodb
   user:
     image: user:ver1
     container_name: user
-    depends_on:
-      - mongodb
-      - redis
+    # depends_on:
+    #   - mongodb
+    #   - redis
   cart:
     image: cart:ver1
     container_name: cart 
-    depends_on:
-     - catalogue
-     - mongodb 
-     - redis
-     - shipping 
+    # depends_on:
+    #  - catalogue
+    #  - mongodb 
+    #  - redis
+    #  - shipping 
   redis:
     image: redis
     container_name: redis
   mysql:
     image: mysql:ver1
     container_name: mysql 
-    depends_on:
-      - shipping
+    # depends_on:
+    #   - shipping
   shipping:
     image: shipping:ver1
     container_name: shipping 
-    depends_on:
-     - mysql
+    # depends_on:
+    #  - mysql
 
 
 
