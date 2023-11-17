@@ -34,20 +34,20 @@ services:
      - catalogue
      - mongodb 
      - redis
-     #- shipping 
+     - shipping 
   redis:
     image: redis
     container_name: redis
   mysql:
     image: mysql:ver1
     container_name: mysql 
-  #   depends_on:
-  #     - shipping
-  # # shipping:
-  #   image: shipping:ver1
-  #   container_name: shipping 
-  #   depends_on:
-  #    - mysql
+    depends_on:
+      - shipping
+  shipping:
+    image: shipping:ver1
+    container_name: shipping 
+    depends_on:
+     - mysql
 
 
 
