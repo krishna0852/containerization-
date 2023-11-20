@@ -51,6 +51,9 @@ services:
   payment:
     image: payment:ver1
     container_name: payment 
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
 
 
 
