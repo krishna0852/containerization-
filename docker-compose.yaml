@@ -48,6 +48,9 @@ services:
     container_name: shipping 
     # depends_on:
     #  - mysql
+  payment:
+    image: payment:ver1
+    container_name: payment 
 
 
 
