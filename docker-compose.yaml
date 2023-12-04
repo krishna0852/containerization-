@@ -68,7 +68,7 @@ services:
     image: redis
     container_name: redis
     volumes:
-     redis: /data
+       redis: /data
   mysql:
     image: mysql:ver1.1
     container_name: mysql 
@@ -88,7 +88,7 @@ services:
     image: rabbitmq
     container_name: rabbitmq
     volumes:
-    rabbitmq: /var/lib/rabbitmq
+       rabbitmq: /var/lib/rabbitmq
   ratings:
     image: ratings:ver1.1
     container_name: ratings 
