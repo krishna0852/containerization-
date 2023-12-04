@@ -17,18 +17,31 @@ volumes:
       o: bind
       type: none
       device: /home/ubuntu/mongodb
+# redis:
+#    driver: local
+#    driver_opts:
+#       o: bind
+#       type: none
+#       device: /home/ubuntu/redis
 redis:
-   driver: local
-   driver_opts:
+    driver: local
+    driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/redis
+      device: /home/ec2-user/redis
+# rabbitmq:
+#    driver: local
+#    driver_opts:
+#       o: bind
+#       type: none
+#       device: /home/ubuntu/rabbitmq
 rabbitmq:
-   driver: local
-   driver_opts:
+    driver: local
+    driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/rabbitmq
+      device: /home/ec2-user/rabbitmq
+
 
 
 services:
@@ -77,11 +90,16 @@ services:
     #  - mongodb 
     #  - redis
     #  - shipping 
+  # redis:
+  #   image: redis
+  #   container_name: redis
+  #   volumes:
+  #     - redis:/data
   redis:
     image: redis
     container_name: redis
     volumes:
-      - redis:/data
+    - redis:/data
   mysql:
     image: mysql:ver1.1
     container_name: mysql 
@@ -101,11 +119,16 @@ services:
     container_name: payment 
     depends_on:
     - rabbitmq
+  # rabbitmq:
+  #   image: rabbitmq
+  #   container_name: rabbitmq
+  #   volumes:
+  #     - rabbitmq:/var/lib/rabbitmq
   rabbitmq:
     image: rabbitmq
     container_name: rabbitmq
     volumes:
-      - rabbitmq:/var/lib/rabbitmq
+    - rabbitmq:/var/lib/rabbitmq
   ratings:
     image: ratings:ver1.1
     container_name: ratings
