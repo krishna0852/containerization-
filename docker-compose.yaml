@@ -1,5 +1,9 @@
 version: "3.9"
 
+networks:
+ roboshop:
+   driver: bridge 
+   
 volumes:
  mysql:
    driver: local
@@ -26,9 +30,7 @@ rabbitmq:
       type: none
       device: /home/ubuntu/rabbitmq
 
-networks:
- roboshop:
-   driver: bridge 
+
 services:
   web:
     image: web-ui:ver1.1
