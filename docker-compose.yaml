@@ -2,8 +2,7 @@ version: "3.9"
 
 networks:
  roboshop:
-   driver: bridge 
-   
+   driver: bridge
 volumes:
  mysql:
    driver: local
@@ -11,39 +10,24 @@ volumes:
       o: bind
       type: none
       device: /home/ubuntu/mysql
+ redis:
+   driver: local
+   driver_opts:
+      o: bind
+      type: none
+      device: /home/ubuntu/redis
+ rabbitmq:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/ec2-user/rabbitmq
  mongodb:
    driver: local
    driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/mongodb
-# redis:
-#    driver: local
-#    driver_opts:
-#       o: bind
-#       type: none
-#       device: /home/ubuntu/redis
-redis:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/ec2-user/redis
-# rabbitmq:
-#    driver: local
-#    driver_opts:
-#       o: bind
-#       type: none
-#       device: /home/ubuntu/rabbitmq
-rabbitmq:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/ec2-user/rabbitmq
-
-
-
 services:
   web:
     image: web-ui:ver1.1
@@ -56,11 +40,11 @@ services:
     - cart
     - mysql
     - shipping
-    
-    # depends_on:
-    #   - catalogue
-    #   - mongodb
-    #   - user
+  mongodb:
+    image: mongo:ver1.1
+    container_name: mongodb
+    volumes:
+      - mongodb:/data/db  
   catalogue:
     image: catalogue:ver1.1
     container_name: catalogue
@@ -68,11 +52,11 @@ services:
     #  - mongodb
     depends_on:
     - mongodb
-  mongodb:
-    image: mongo:ver1.1
-    container_name: mongodb
+  redis:
+    image: redis
+    container_name: redis
     volumes:
-      - mongodb:/data/db
+      - redis:/data 
   user:
     image: user:ver1.1
     container_name: user
@@ -89,17 +73,7 @@ services:
     #  - catalogue
     #  - mongodb 
     #  - redis
-    #  - shipping 
-  # redis:
-  #   image: redis
-  #   container_name: redis
-  #   volumes:
-  #     - redis:/data
-  redis:
-    image: redis
-    container_name: redis
-    volumes:
-    - redis:/data
+    #  - shipping
   mysql:
     image: mysql:ver1.1
     container_name: mysql 
@@ -114,27 +88,23 @@ services:
     #  - mysql
     depends_on:
     - mysql
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
   payment:
     image: payment:ver1.1
     container_name: payment 
     depends_on:
     - rabbitmq
-  # rabbitmq:
-  #   image: rabbitmq
-  #   container_name: rabbitmq
-  #   volumes:
-  #     - rabbitmq:/var/lib/rabbitmq
-  rabbitmq:
-    image: rabbitmq
-    container_name: rabbitmq
-    volumes:
-    - rabbitmq:/var/lib/rabbitmq
   ratings:
     image: ratings:ver1.1
     container_name: ratings
     depends_on:
     - mysql 
+    
+    
 
-
-
-      
+  
+  
