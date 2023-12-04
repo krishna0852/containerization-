@@ -57,7 +57,7 @@ services:
     image: mongo:ver1.1
     container_name: mongodb
     volumes:
-      - mongodb: /data/db
+      - mongodb:/data/db
   user:
     image: user:ver1.1
     container_name: user
