@@ -21,7 +21,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/ec2-user/rabbitmq
+      device: /home/ubuntu/rabbitmq
  mongodb:
    driver: local
    driver_opts:
@@ -103,7 +103,7 @@ services:
     container_name: ratings
     depends_on:
     - mysql 
-    
+
     
 
   
