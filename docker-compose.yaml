@@ -1,5 +1,31 @@
 version: "3.9"
 
+volumes:
+ mysql:
+   driver: local
+   driver_ports:
+      o: bind
+      type: none
+      device: /home/ubuntu/mysql
+ mongodb:
+   driver: local
+   driver_ports:
+      o: bind
+      type: none
+      device: /home/ubuntu/mongodb
+redis:
+   driver: local
+   driver_ports:
+      o: bind
+      type: none
+      device: /home/ubuntu/redis
+rabbitmq:
+   driver: local
+   driver_ports:
+      o: bind
+      type: none
+      device: /home/ubuntu/rabbitmq
+
 networks:
  roboshop:
    driver: bridge 
@@ -9,6 +35,7 @@ services:
     container_name: web_container 
     ports:
       - "80:80"
+    
     # depends_on:
     #   - catalogue
     #   - mongodb
@@ -21,6 +48,8 @@ services:
   mongodb:
     image: mongo:ver1.1
     container_name: mongodb
+    volumes:
+    mongodb: /data/db
   user:
     image: user:ver1.1
     container_name: user
@@ -38,9 +67,13 @@ services:
   redis:
     image: redis
     container_name: redis
+    volumes:
+     redis: /data
   mysql:
     image: mysql:ver1.1
     container_name: mysql 
+    volumes:
+      - mysql: var/lib/mysql
     # depends_on:
     #   - shipping
   shipping:
@@ -54,6 +87,8 @@ services:
   rabbitmq:
     image: rabbitmq
     container_name: rabbitmq
+    volumes:
+    rabbitmq: /var/lib/rabbitmq
   ratings:
     image: ratings:ver1.1
     container_name: ratings 
