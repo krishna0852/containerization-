@@ -5,7 +5,7 @@ networks:
    driver: bridge 
 services:
   web:
-    image: web-ui:ver1
+    image: web-ui:ver1.1
     container_name: web_container 
     ports:
       - "80:80"
@@ -14,21 +14,21 @@ services:
     #   - mongodb
     #   - user
   catalogue:
-    image: catalogue:ver1
+    image: catalogue:ver1.1
     container_name: catalogue
     # depends_on:
     #  - mongodb
   mongodb:
-    image: mongo:ver1
+    image: mongo:ver1.1
     container_name: mongodb
   user:
-    image: user:ver1
+    image: user:ver1.1
     container_name: user
     # depends_on:
     #   - mongodb
     #   - redis
   cart:
-    image: cart:ver1
+    image: cart:ver1.1
     container_name: cart 
     # depends_on:
     #  - catalogue
@@ -39,17 +39,17 @@ services:
     image: redis
     container_name: redis
   mysql:
-    image: mysql:ver1
+    image: mysql:ver1.1
     container_name: mysql 
     # depends_on:
     #   - shipping
   shipping:
-    image: shipping:ver1
+    image: shipping:ver1.1
     container_name: shipping 
     # depends_on:
     #  - mysql
   payment:
-    image: payment:ver1
+    image: payment:ver1.1
     container_name: payment 
   rabbitmq:
     image: rabbitmq
