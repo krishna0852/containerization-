@@ -79,12 +79,12 @@ services:
     image: redis
     container_name: redis
     volumes:
-      - redis: /data
+      - redis:/data
   mysql:
     image: mysql:ver1.1
     container_name: mysql 
     volumes:
-      - mysql: var/lib/mysql
+      - mysql:/var/lib/mysql
     # depends_on:
     #   - shipping
   shipping:
@@ -103,7 +103,7 @@ services:
     image: rabbitmq
     container_name: rabbitmq
     volumes:
-      - rabbitmq: /var/lib/rabbitmq
+      - rabbitmq:/var/lib/rabbitmq
   ratings:
     image: ratings:ver1.1
     container_name: ratings
