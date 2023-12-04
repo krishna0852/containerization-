@@ -3,13 +3,13 @@ version: "3.9"
 volumes:
  mysql:
    driver: local
-   driver_ports:
+   driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/mysql
  mongodb:
    driver: local
-   driver_ports:
+   driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/mongodb
@@ -21,7 +21,7 @@ redis:
       device: /home/ubuntu/redis
 rabbitmq:
    driver: local
-   driver_ports:
+   driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/rabbitmq
