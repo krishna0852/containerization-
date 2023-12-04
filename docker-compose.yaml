@@ -15,7 +15,7 @@ volumes:
       device: /home/ubuntu/mongodb
 redis:
    driver: local
-   driver_ports:
+   driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/redis
