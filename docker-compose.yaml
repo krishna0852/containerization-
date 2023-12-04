@@ -55,7 +55,7 @@ services:
     image: rabbitmq
     container_name: rabbitmq
   ratings:
-    image: ratings:ver1
+    image: ratings:ver1.1
     container_name: ratings 
 
 
