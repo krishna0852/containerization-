@@ -16,7 +16,7 @@ volumes:
       o: bind
       type: none
       device: /home/ubuntu/dckr/redis
- rabbitmq:
+ rabbitm:
     driver: local
     driver_opts:
       o: bind
