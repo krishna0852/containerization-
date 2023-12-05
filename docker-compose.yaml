@@ -1,39 +1,40 @@
 version: "3.9"
-
 networks:
- roboshop:
-   driver: bridge
+  roboshop:
+    driver: bridge
 volumes:
- mysql:
-   driver: local
-   driver_opts:
+# This is equivalent to docker volume create [volume-name]. these are named volumes
+  mysql:
+    driver: local
+    driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/dckr/mysql
- redis:
-   driver: local
-   driver_opts:
+  redis:
+    driver: local
+    driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/dckr/redis
- rabbitmq:
+  rabbitmq:
     driver: local
     driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/dckr/rabbitmq
- mongodb:
-   driver: local
-   driver_opts:
+  mongodb:
+    driver: local
+    driver_opts:
       o: bind
       type: none
       device: /home/ubuntu/dckr/mongodb
+
 services:
   web:
     image: web-ui:ver1.1
-    container_name: web_container 
+    container_name: web
     ports:
-      - "80:80"
+    - "80:80"
     depends_on:
     - catalogue
     - user
@@ -44,67 +45,51 @@ services:
     image: mongo:ver1.1
     container_name: mongodb
     volumes:
-      - mongodb:/data/db  
+    - mongodb:/data/db
   catalogue:
     image: catalogue:ver1.1
     container_name: catalogue
-    # depends_on:
-    #  - mongodb
     depends_on:
     - mongodb
   redis:
     image: redis
     container_name: redis
     volumes:
-      - redis:/data 
+    - redis:/data
   user:
     image: user:ver1.1
     container_name: user
     depends_on:
     - mongodb
     - redis
-    # depends_on:
-    #   - mongodb
-    #   - redis
   cart:
     image: cart:ver1.1
-    container_name: cart 
-    # depends_on:
-    #  - catalogue
-    #  - mongodb 
-    #  - redis
-    #  - shipping
+    container_name: cart
+    depends_on:
+    - redis
+    - catalogue
   mysql:
     image: mysql:ver1.1
-    container_name: mysql 
+    container_name: mysql
     volumes:
-      - mysql:/var/lib/mysql
-    # depends_on:
-    #   - shipping
+    - mysql:/var/lib/mysql
   shipping:
     image: shipping:ver1.1
-    container_name: shipping 
-    # depends_on:
-    #  - mysql
+    container_name: shipping
     depends_on:
     - mysql
   rabbitmq:
     image: rabbitmq
     container_name: rabbitmq
     volumes:
-      - rabbitmq:/var/lib/rabbitmq
+    - rabbitmq:/var/lib/rabbitmq
   payment:
     image: payment:ver1.1
-    container_name: payment 
+    container_name: payment
     depends_on:
     - rabbitmq
   ratings:
     image: ratings:ver1.1
     container_name: ratings
     depends_on:
-    - mysql 
-
-    
-
-  
-  
+    - mysql
