@@ -9,25 +9,25 @@ volumes:
    driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/mysql
+      device: /home/ubuntu/dckr/mysql
  redis:
    driver: local
    driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/redis
+      device: /home/ubuntu/dckr/redis
  rabbitmq:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/rabbitmq
+      device: /home/ubuntu/dckr/rabbitmq
  mongodb:
    driver: local
    driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/mongodb
+      device: /home/ubuntu/dckr/mongodb
 services:
   web:
     image: web-ui:ver1.1
