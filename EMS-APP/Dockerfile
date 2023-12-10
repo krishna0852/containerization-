@@ -4,9 +4,7 @@ FROM node:${VERSION} AS WEB-BUILD
 
 WORKDIR /opt/server 
 
-COPY package* /opt/server/ 
-
-COPY src /opt/server/
+COPY . /opt/server/ 
 
 RUN npm install 
 
