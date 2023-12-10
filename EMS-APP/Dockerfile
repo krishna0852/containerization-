@@ -13,9 +13,9 @@ RUN npm run build
 
 FROM nginx
 
-RUN rm -rf /usr/share/nginx/html/index.html
+RUN rm -rf /usr/share/nginx/html/*.html
 
-COPY --from=WEB-BUILD /opt/server/build/index.html /usr/share/nginx/build/html/
+COPY --from=WEB-BUILD /opt/server/build/index.html /usr/share/nginx/html/
 
 
 
