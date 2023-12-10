@@ -10,12 +10,14 @@ COPY src /opt/server/
 
 RUN npm install 
 
+RUN npm run build
+
 
 FROM nginx
 
-RUN rm -rf /usr/share/ning/html/index.html
+RUN rm -rf /usr/share/nginx/html/index.html
 
-COPY --from=WEB-BUILD /opt/server/static/index.html /usr/share/nginx/html/
+COPY --from=WEB-BUILD /opt/server/build/index.html /usr/share/nginx/build/html/
 
 
 
